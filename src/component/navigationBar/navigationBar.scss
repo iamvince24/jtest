@@ -1,0 +1,43 @@
+.navigationBar {
+  width: 375px;
+  height: 88px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  z-index: 400;
+
+  .navigationBarTitle {
+    width: 100%;
+    height: 44px;
+    // border: 1px solid white;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .iconContainer {
+      width: 34px;
+      height: 44px;
+      // border: 1px solid white;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      .iconContainer div {
+        width: 24px;
+        height: 24px;
+        // border: 1px solid white;
+      }
+    }
+    .title {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 24px;
+      letter-spacing: -0.40799999237060547px;
+      text-align: center;
+    }
+  }
+}
