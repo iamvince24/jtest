@@ -1,0 +1,27 @@
+.productImgContainer {
+  width: 375px;
+  height: 375px;
+  position: relative;
+  background-color: gray;
+  .productImgTag {
+    width: 35px;
+    height: 28px;
+    position: absolute;
+    top: 335px;
+    left: 328px;
+    padding: 4px, 8px, 4px, 8px;
+    border-radius: 32px;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    .productImgTagNumber {
+      margin: auto;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: 0em;
+      text-align: center;
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+}

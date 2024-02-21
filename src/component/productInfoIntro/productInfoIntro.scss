@@ -1,0 +1,27 @@
+.productInfoIntro {
+  width: 351px;
+  padding: 12px 0px 12px 0px;
+  border-radius: 12px;
+  background-color: rgba(39, 41, 52, 1);
+
+  .productInfoContainer {
+    width: 100%;
+    padding: 2px 12px;
+    .title {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .caption {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0em;
+      text-align: left;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}

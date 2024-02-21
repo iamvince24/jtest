@@ -1,0 +1,230 @@
+.popup {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 200;
+  justify-content: center;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0s;
+
+  &.show {
+    opacity: 1;
+    z-index: 300;
+  }
+
+  .popupWindow {
+    width: 375px;
+    height: 458px;
+    position: fixed;
+    z-index: 350;
+    background-color: rgba(47, 49, 64, 1);
+    padding: 12px 0px 0px 0px;
+
+    bottom: -458px;
+    transition: bottom 0.4s ease-out;
+
+    &.open {
+      bottom: 0;
+    }
+
+    .header {
+      height: 76px;
+      padding: 4px 12px;
+      display: flex;
+      flex-direction: row;
+      gap: 11px;
+      img {
+        width: 64px;
+        height: 64px;
+        border-radius: 8px;
+      }
+      .description {
+        display: flex;
+        flex-direction: column;
+        .title {
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 22px;
+          letter-spacing: 0em;
+          text-align: left;
+          color: rgba(255, 255, 255, 0.9);
+        }
+        .price {
+          font-family: PingFang TC;
+          font-size: 20px;
+          font-weight: 500;
+          line-height: 28px;
+          letter-spacing: 0em;
+          text-align: left;
+          color: rgba(255, 255, 255, 0.9);
+          span {
+            font-family: PingFang TC;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 24px;
+            letter-spacing: 0em;
+            text-align: left;
+          }
+        }
+      }
+      .closeIcon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    .dividePop {
+      width: 375px;
+      height: 17px;
+      display: flex;
+      .dividePopLine {
+        margin: auto;
+        width: 375px;
+        border: 0.5px solid rgba(29, 31, 39, 1);
+      }
+    }
+    .infoContainer {
+      display: flex;
+      flex-direction: column;
+      .info {
+        display: flex;
+        flex-direction: column;
+        .infoTitle {
+          display: flex;
+          flex-direction: row;
+          padding: 8px 12px 4px 12px;
+          gap: 8px;
+          .title {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 24px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: rgba(255, 255, 255, 0.9);
+          }
+          .details {
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 20px;
+            letter-spacing: 0em;
+            text-align: left;
+            color: rgba(255, 255, 255, 0.5);
+          }
+        }
+        .infoBtnContainer {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          padding: 4px 12px 12px 12px;
+          gap: 10px;
+          .infoBtn {
+            height: 32px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background: none;
+            color: rgba(255, 255, 255, 1);
+            border: 1px solid rgba(84, 88, 114, 1);
+            cursor: pointer;
+            &:focus {
+              // background-color: rgba(186, 41, 67, 1);
+              // // color: rgba(255, 255, 255, 0.2);
+              // border: 1px solid rgba(186, 41, 67, 1);
+            }
+          }
+          .infoBtnFocus {
+            background-color: rgba(186, 41, 67, 1);
+            // color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(186, 41, 67, 1);
+          }
+          .infoBtnNone {
+            background: none;
+            color: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+          }
+        }
+      }
+    }
+    .purchaseBar {
+      display: flex;
+      flex-direction: column;
+      .purchaseNumber {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 4px 12px 12px 12px;
+        .title {
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 24px;
+          letter-spacing: 0em;
+          text-align: left;
+          color: rgba(255, 255, 255, 0.9);
+        }
+        .container {
+          width: 98px;
+          height: 24px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .numberBtn {
+            cursor: pointer;
+            width: 22px;
+            height: 22px;
+            top: 1px;
+            left: 1px;
+            border-radius: 3.3px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            svg {
+              margin: auto;
+            }
+            .allowBtn {
+              path {
+                fill-opacity: 0.9;
+              }
+            }
+            .forbidBtn {
+              path {
+                fill-opacity: 0.1;
+              }
+            }
+          }
+          input {
+            width: 44px;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 24px;
+            letter-spacing: 0px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 0;
+            margin: 0;
+            background: none;
+            outline: none;
+          }
+        }
+      }
+      .purchaseBtnContainer {
+        width: 100%;
+        height: 56px;
+        padding: 8px 12px 0px 12px;
+        .purchaseBtn {
+          width: 100%;
+          padding: 12px 16px 12px 16px;
+          border-radius: 12px;
+          border: 1.5px;
+          gap: 8px;
+          background: rgba(186, 41, 67, 1);
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 24px;
+          letter-spacing: 0em;
+          text-align: center;
+          color: rgba(255, 255, 255, 1);
+        }
+      }
+    }
+  }
+}

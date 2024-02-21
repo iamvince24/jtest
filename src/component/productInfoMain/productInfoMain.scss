@@ -1,0 +1,110 @@
+.productInfoMain {
+  width: 351px;
+  // height: 221px;
+  padding: 12px 0px 12px 0px;
+  border-radius: 12px;
+  background-color: rgba(39, 41, 52, 1);
+  .title {
+    color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    padding: 2px 12px 0px 12px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+  }
+  .priceContainer {
+    width: 100%;
+    padding: 2px 0px 2px 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    .discountAfter {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 28px;
+      letter-spacing: 0em;
+      text-align: left;
+
+      span {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+    }
+    .discountBefore {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+      letter-spacing: 0em;
+      text-align: left;
+      // text-decoration: line-through;
+      position: relative;
+      ::after {
+        content: "";
+        position: absolute;
+        bottom: 35%;
+        left: 0;
+        right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+  .labelsContainer {
+    width: 100%;
+    padding: 4px 0px 4px 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    .labels {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 11px;
+      font-weight: 500;
+      line-height: 15px;
+      letter-spacing: 0px;
+      text-align: left;
+      padding: 3px 6px 2px 6px;
+      border-radius: 4px;
+      background-color: rgba(109, 34, 53, 1);
+    }
+  }
+
+  .purchaseNotesContainer {
+    width: 100%;
+    padding: 2px 12px;
+    display: flex;
+    justify-content: center;
+
+    .purchaseNotes {
+      width: 327px;
+      .note {
+        margin-left: 20px;
+        color: white;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+        letter-spacing: 0em;
+        text-align: left;
+      }
+    }
+  }
+}
+
+.divide {
+  width: 351px;
+  height: 17px;
+  display: flex;
+  hr {
+    margin: auto;
+    width: 327px;
+    border: 0.5px solid rgba(29, 31, 39, 1);
+  }
+}
