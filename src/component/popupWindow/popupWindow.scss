@@ -126,15 +126,9 @@
             color: rgba(255, 255, 255, 1);
             border: 1px solid rgba(84, 88, 114, 1);
             cursor: pointer;
-            &:focus {
-              // background-color: rgba(186, 41, 67, 1);
-              // // color: rgba(255, 255, 255, 0.2);
-              // border: 1px solid rgba(186, 41, 67, 1);
-            }
           }
           .infoBtnFocus {
             background-color: rgba(186, 41, 67, 1);
-            // color: rgba(255, 255, 255, 0.2);
             border: 1px solid rgba(186, 41, 67, 1);
           }
           .infoBtnNone {
@@ -178,6 +172,13 @@
             display: flex;
             svg {
               margin: auto;
+              transition: transform 0.3s ease;
+              &:hover {
+                transform: scale(1.08);
+              }
+              &:active {
+                transform: scale(1);
+              }
             }
             .allowBtn {
               path {

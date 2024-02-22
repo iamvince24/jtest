@@ -6,7 +6,7 @@ export default function NavigationBar() {
     <div className="navigationBar">
       <div className="navigationBarTitle">
         <div className="iconContainer">
-          <div>
+          <div className="iconBtnEffect">
             <img src={leftSideIcon} alt="Logo" />
           </div>
         </div>

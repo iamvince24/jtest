@@ -104,7 +104,7 @@ export default function PopupWindow({
           <img
             src={closeIcon}
             alt="Logo"
-            className="closeIcon"
+            className="closeIcon iconBtnEffect"
             onClick={togglePopup}
           />
         </div>
@@ -126,7 +126,7 @@ export default function PopupWindow({
                       setSizeFocus(e.target.innerHTML);
                       updateSize(e.target.innerHTML);
                     }}
-                    className={`infoBtn ${
+                    className={`infoBtn specsBtnEffect ${
                       checkInventory(productData.specs[sizeType])
                         ? "infoBtnNone"
                         : ""
@@ -152,7 +152,7 @@ export default function PopupWindow({
                       setColorFocus(e.target.innerHTML);
                       updateColor(e.target.innerHTML);
                     }}
-                    className={`infoBtn  ${
+                    className={`infoBtn specsBtnEffect ${
                       colorType.inventory === 0 ? "infoBtnNone" : ""
                     }
                     ${
@@ -240,14 +240,16 @@ export default function PopupWindow({
           </div>
           <div className="purchaseBtnContainer">
             <button
-              className="purchaseBtn"
+              className="purchaseBtn buttonEffect"
               onClick={() => {
                 setGlobalCart((prevGlobalCart) => [
                   ...prevGlobalCart,
                   cartInfo,
                 ]);
                 togglePopup();
-                togglePopupCart();
+                if (actionBtn === "加入購物車") {
+                  togglePopupCart();
+                }
               }}
             >
               {actionBtn}

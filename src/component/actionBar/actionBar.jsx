@@ -22,14 +22,14 @@ export default function ActionBar({ productData, globalCart, setGlobalCart }) {
       <div className="actionBar">
         <div className="actionBarButtons">
           <div className="cartContainer">
-            <div className="cartIcon" onClick={togglePopupCart}>
+            <div className="cartIcon iconBtnEffect" onClick={togglePopupCart}>
               <img src={cartIcon} alt="Logo" />
               {globalCart.length === 0 ? null : <div>{globalCart.length}</div>}
             </div>
             <span>購物車</span>
           </div>
           <button
-            className="addToCartBtn"
+            className="addToCartBtn buttonEffect"
             onClick={(e) => {
               togglePopup();
               setActionBtn(e.target.innerHTML);
@@ -38,7 +38,7 @@ export default function ActionBar({ productData, globalCart, setGlobalCart }) {
             加入購物車
           </button>
           <button
-            className="buyNowBtn"
+            className="buyNowBtn buttonEffect"
             onClick={(e) => {
               togglePopup();
               setActionBtn(e.target.innerHTML);
