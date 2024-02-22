@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import "./actionBar.scss";
 import cartIcon from "../../assets/icon/cartIcon.svg";
-// import closeIcon from "../../assets/icon/close.svg";
-// import plusIcon from "../../assets/icon/plus.svg";
-// import subIcon from "../../assets/icon/sub.svg";
-// import productImg from "../../assets/img/productImg.png";
 import PopupWindow from "../popupWindow/popupWindow";
+import PopupCart from "../popupCart/popupCart";
 
-export default function ActionBar({ productData }) {
+export default function ActionBar({ productData, globalCart, setGlobalCart }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenCart, setIsOpenCart] = useState(false);
   const [actionBtn, setActionBtn] = useState("");
-  const [cart, setCart] = useState([]);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
+  };
+
+  const togglePopupCart = () => {
+    setIsOpenCart(!isOpenCart);
   };
 
   return (
@@ -21,9 +22,9 @@ export default function ActionBar({ productData }) {
       <div className="actionBar">
         <div className="actionBarButtons">
           <div className="cartContainer">
-            <div className="cartIcon">
+            <div className="cartIcon" onClick={togglePopupCart}>
               <img src={cartIcon} alt="Logo" />
-              {cart.length === 0 ? null : <div>{cart.length}</div>}
+              {globalCart.length === 0 ? null : <div>{globalCart.length}</div>}
             </div>
             <span>購物車</span>
           </div>
@@ -52,8 +53,16 @@ export default function ActionBar({ productData }) {
       <PopupWindow
         isOpen={isOpen}
         togglePopup={togglePopup}
+        togglePopupCart={togglePopupCart}
         actionBtn={actionBtn}
         productData={productData}
+        setGlobalCart={setGlobalCart}
+      />
+      <PopupCart
+        isOpenCart={isOpenCart}
+        globalCart={globalCart}
+        setGlobalCart={setGlobalCart}
+        togglePopupCart={togglePopupCart}
       />
     </>
   );

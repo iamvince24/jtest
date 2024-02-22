@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import "./App.scss";
 import Product from "./component/product/product";
 import NavigationBar from "./component/navigationBar/navigationBar";
@@ -7,6 +8,7 @@ import productImg from "./assets/img/productImg.png";
 const data = {
   products: {
     "000000": {
+      id: "000000",
       name: "LN 新竹街口攻城獅台灣封城紫色炫風聯名款限定發售復古球衣系列",
       image: [productImg, productImg, productImg, productImg, productImg],
       price: {
@@ -37,55 +39,71 @@ const data = {
           "請於訂單備註填寫您需要的號碼，若未填寫將以空白球衣寄出，客製化商品不接受退換貨。",
         ],
       ],
-      size: {
+      specs: {
         S: [
-          { colorName: "酷炫黑", inventory: 5 },
-          { colorName: "紫旋風", inventory: 5 },
-          { colorName: "暴風紅", inventory: 0 },
-          { colorName: "耀眼黃", inventory: 5 },
-          { colorName: "我是第二行選項", inventory: 5 },
+          { specsName: "酷炫黑", inventory: 5 },
+          { specsName: "紫旋風", inventory: 2 },
+          { specsName: "暴風紅", inventory: 0 },
+          { specsName: "耀眼黃", inventory: 5 },
+          { specsName: "我是第二行選項", inventory: 4 },
         ],
         M: [
-          { colorName: "酷炫黑", inventory: 5 },
-          { colorName: "紫旋風", inventory: 5 },
-          { colorName: "暴風紅", inventory: 5 },
-          { colorName: "耀眼黃", inventory: 5 },
-          { colorName: "我是第二行選項", inventory: 5 },
+          { specsName: "酷炫黑", inventory: 5 },
+          { specsName: "紫旋風", inventory: 0 },
+          { specsName: "暴風紅", inventory: 2 },
+          { specsName: "耀眼黃", inventory: 5 },
+          { specsName: "我是第二行選項", inventory: 0 },
         ],
         L: [
-          { colorName: "酷炫黑", inventory: 5 },
-          { colorName: "紫旋風", inventory: 0 },
-          { colorName: "暴風紅", inventory: 5 },
-          { colorName: "耀眼黃", inventory: 5 },
-          { colorName: "我是第二行選項", inventory: 5 },
+          { specsName: "酷炫黑", inventory: 5 },
+          { specsName: "紫旋風", inventory: 0 },
+          { specsName: "暴風紅", inventory: 5 },
+          { specsName: "耀眼黃", inventory: 5 },
+          { specsName: "我是第二行選項", inventory: 5 },
         ],
         XL: [
-          { colorName: "酷炫黑", inventory: 0 },
-          { colorName: "紫旋風", inventory: 0 },
-          { colorName: "暴風紅", inventory: 0 },
-          { colorName: "耀眼黃", inventory: 0 },
-          { colorName: "我是第二行選項", inventory: 0 },
+          { specsName: "酷炫黑", inventory: 0 },
+          { specsName: "紫旋風", inventory: 2 },
+          { specsName: "暴風紅", inventory: 0 },
+          { specsName: "耀眼黃", inventory: 1 },
+          { specsName: "我是第二行選項", inventory: 5 },
         ],
         XXL: [
-          { colorName: "酷炫黑", inventory: 5 },
-          { colorName: "紫旋風", inventory: 0 },
-          { colorName: "暴風紅", inventory: 5 },
-          { colorName: "耀眼黃", inventory: 5 },
-          { colorName: "我是第二行選項", inventory: 0 },
+          { specsName: "酷炫黑", inventory: 5 },
+          { specsName: "紫旋風", inventory: 0 },
+          { specsName: "暴風紅", inventory: 0 },
+          { specsName: "耀眼黃", inventory: 5 },
+          { specsName: "我是第二行選項", inventory: 0 },
         ],
       },
+      specsType: ["尺寸", "顏色"],
+      specsN: [
+        {
+          specsName: "尺寸",
+          specsType: ["S", "M", "L", "XL", "XXL"],
+          inventory: { S: 5, M: 5, L: 5, XL: 5, XXL: 5 },
+        },
+      ],
     },
   },
 };
 
 function App() {
+  const [globalCart, setGlobalCart] = useState([]);
+
+  console.log(globalCart);
+
   const productData = data.products["000000"];
 
   return (
     <div className="App">
       <NavigationBar />
       <Product productData={productData} />
-      <ActionBar productData={productData} />
+      <ActionBar
+        productData={productData}
+        globalCart={globalCart}
+        setGlobalCart={setGlobalCart}
+      />
     </div>
   );
 }

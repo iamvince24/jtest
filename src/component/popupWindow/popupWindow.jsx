@@ -1,40 +1,54 @@
 import React, { useState } from "react";
 import "./popupWindow.scss";
-import productImg from "../../assets/img/productImg.png";
 import closeIcon from "../../assets/icon/close.svg";
 
 export default function PopupWindow({
   isOpen,
   togglePopup,
+  togglePopupCart,
   actionBtn,
   productData,
+  setGlobalCart,
 }) {
+  const specsArray = Object.keys(productData.specs);
   const [sizeFocus, setSizeFocus] = useState(
-    Object.keys(productData.size).length === 0
+    Object.keys(productData.specs).length === 0
       ? ""
-      : Object.keys(productData.size)[0]
+      : Object.keys(productData.specs)[0]
   );
-  const [colorFocus, setColorFocus] = useState("");
+  const [colorFocus, setColorFocus] = useState(
+    Object.keys(productData.specs).length === 0
+      ? ""
+      : productData.specs[specsArray[0]][0].specsName
+  );
+
   const [value, setValue] = useState(1);
+  const [cartInfo, setCartInfo] = useState({
+    productsId: productData.id,
+    name: productData.name,
+    size: sizeFocus,
+    color: colorFocus,
+    price: productData.price.discountAfter.high,
+    number: value,
+    total: 0,
+  });
 
   const handleDecrease = () => {
     setValue((prevValue) => prevValue - 1);
+    updateNumber(value - 1);
   };
 
   const handleIncrease = () => {
     setValue((prevValue) => prevValue + 1);
+    updateNumber(value + 1);
   };
 
   const handleChange = (event) => {
     setValue(parseInt(event.target.value) || 0);
+    updateNumber(event.target.value);
   };
 
-  console.log();
-
-  const sizeArray = Object.keys(productData.size);
-
-  // console.log(productData.size.S);
-
+  // 判斷某此寸是否有庫存
   function checkInventory(data) {
     for (const item of data) {
       if (item.inventory !== 0) {
@@ -43,6 +57,37 @@ export default function PopupWindow({
     }
     return true;
   }
+
+  // 找顏色的 index
+  const findColorIndexByName = (data, targetColorName) => {
+    const foundIndex = data.findIndex(
+      (item) => item.specsName === targetColorName
+    );
+    return foundIndex === -1 ? null : foundIndex;
+  };
+
+  // 更新 size
+  const updateSize = (newSize) => {
+    setCartInfo((prevCartInfo) => ({
+      ...prevCartInfo,
+      size: newSize,
+    }));
+  };
+  // 更新 color
+  const updateColor = (newColor) => {
+    setCartInfo((prevCartInfo) => ({
+      ...prevCartInfo,
+      color: newColor,
+    }));
+  };
+  // 更新 number
+  const updateNumber = (newNumber) => {
+    console.log(newNumber);
+    setCartInfo((prevCartInfo) => ({
+      ...prevCartInfo,
+      number: newNumber,
+    }));
+  };
 
   return (
     <div className={`popup ${isOpen ? "show" : ""}`}>
@@ -73,15 +118,16 @@ export default function PopupWindow({
               <div className="details">補充說明</div>
             </div>
             <div className="infoBtnContainer">
-              {sizeArray.map((sizeType) => {
+              {specsArray.map((sizeType) => {
                 return (
                   <button
                     key={sizeType}
                     onClick={(e) => {
                       setSizeFocus(e.target.innerHTML);
+                      updateSize(e.target.innerHTML);
                     }}
                     className={`infoBtn ${
-                      checkInventory(productData.size[sizeType])
+                      checkInventory(productData.specs[sizeType])
                         ? "infoBtnNone"
                         : ""
                     } ${sizeFocus === sizeType ? "infoBtnFocus" : ""}`}
@@ -98,21 +144,22 @@ export default function PopupWindow({
               <div className="details">補充說明</div>
             </div>
             <div className="infoBtnContainer">
-              {productData.size[sizeFocus]?.map((colorType) => {
+              {productData.specs[sizeFocus]?.map((colorType) => {
                 return (
                   <button
-                    key={colorType.colorName}
+                    key={colorType.specsName}
                     onClick={(e) => {
                       setColorFocus(e.target.innerHTML);
+                      updateColor(e.target.innerHTML);
                     }}
                     className={`infoBtn  ${
                       colorType.inventory === 0 ? "infoBtnNone" : ""
                     }
                     ${
-                      colorFocus === colorType.colorName ? "infoBtnFocus" : ""
+                      colorFocus === colorType.specsName ? "infoBtnFocus" : ""
                     }`}
                   >
-                    {colorType.colorName}
+                    {colorType.specsName}
                   </button>
                 );
               })}
@@ -126,7 +173,11 @@ export default function PopupWindow({
           <div className="purchaseNumber">
             <div className="title">購買數量</div>
             <div className="container">
-              <div className="numberBtn" onClick={handleDecrease}>
+              <button
+                className="numberBtn"
+                onClick={handleDecrease}
+                disabled={value <= 1}
+              >
                 <svg
                   className={`${value <= 1 ? "forbidBtn" : "allowBtn"}`}
                   width="13"
@@ -143,12 +194,30 @@ export default function PopupWindow({
                     fillOpacity="0.9"
                   />
                 </svg>
-              </div>
+              </button>
               <input type="text" value={value} onChange={handleChange} />
-              <div className="numberBtn" onClick={handleIncrease}>
+              <button
+                className="numberBtn"
+                onClick={handleIncrease}
+                disabled={
+                  value >=
+                  productData.specs[sizeFocus][
+                    findColorIndexByName(
+                      productData.specs[sizeFocus],
+                      colorFocus
+                    )
+                  ].inventory
+                }
+              >
                 <svg
                   className={` ${
-                    value >= productData.size[sizeFocus][0].inventory
+                    value >=
+                    productData.specs[sizeFocus][
+                      findColorIndexByName(
+                        productData.specs[sizeFocus],
+                        colorFocus
+                      )
+                    ].inventory
                       ? "forbidBtn"
                       : "allowBtn"
                   }`}
@@ -166,11 +235,23 @@ export default function PopupWindow({
                     fillOpacity="0.9"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           </div>
           <div className="purchaseBtnContainer">
-            <button className="purchaseBtn">{actionBtn}</button>
+            <button
+              className="purchaseBtn"
+              onClick={() => {
+                setGlobalCart((prevGlobalCart) => [
+                  ...prevGlobalCart,
+                  cartInfo,
+                ]);
+                togglePopup();
+                togglePopupCart();
+              }}
+            >
+              {actionBtn}
+            </button>
           </div>
           <div style={{ width: "100%", height: "34px" }}></div>
         </div>
