@@ -47,7 +47,7 @@ export default function PopupCart({
                     <img
                       src={closeIcon}
                       alt="closeIcon"
-                      className="closeIcon"
+                      className="closeIcon iconBtnEffect"
                       onClick={() => {
                         removeFromCart(index);
                       }}

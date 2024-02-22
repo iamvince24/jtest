@@ -242,12 +242,12 @@ export default function PopupWindow({
             <button
               className="purchaseBtn buttonEffect"
               onClick={() => {
-                setGlobalCart((prevGlobalCart) => [
-                  ...prevGlobalCart,
-                  cartInfo,
-                ]);
                 togglePopup();
                 if (actionBtn === "加入購物車") {
+                  setGlobalCart((prevGlobalCart) => [
+                    ...prevGlobalCart,
+                    cartInfo,
+                  ]);
                   togglePopupCart();
                 }
               }}
